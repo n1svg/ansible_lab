@@ -1,0 +1,23 @@
+---
+- hosts: all
+  tasks:
+  - name: Uninstall httpd service
+    yum:
+      name: httpd
+      state: absent
+
+  - name: Delete file 
+    file:
+      path: /var/www/html/index.html
+      state: absent
+
+  - name: Configuring firewalld
+    firewalld:
+      service: "{{ item }}"
+      permanent: true
+      state: disabled
+    loop: 
+      - http
+      - https
+
+...

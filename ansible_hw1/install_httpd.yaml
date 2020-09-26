@@ -1,0 +1,55 @@
+---
+- hosts: all
+  tasks:
+  - name: install httpd service
+    yum:
+      name: httpd
+      state: latest
+
+  - name: Enable service httpd, and not touch the state
+    service:
+      name: httpd
+      enabled: yes
+ 
+  - name: Start service httpd, if not started
+    service:
+      name: httpd
+      state: started
+
+  - name: check httpd service
+    command: systemctl status httpd 
+    register: result
+#    ignore_errors: yes
+  - name: showing report
+    debug:
+     var: result
+
+  - name: Create file 
+    file:
+      path: /var/www/html/index.html
+      state: touch
+#      owner: root
+#      group: root
+
+  - name: Change index.html
+    lineinfile:
+      line: 'Welcome to my web server'
+      path: /var/www/html/index.html
+    notify: restart httpd
+
+  - name: Configuring firewalld
+    firewalld:
+      service: "{{ item }}"
+      permanent: true
+      state: enabled
+    loop: 
+      - http
+      - https
+
+  handlers:
+    - name: restart httpd
+      service:
+        name: httpd
+        state: restarted
+
+...
