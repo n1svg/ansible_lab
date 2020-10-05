@@ -1,0 +1,16 @@
+# tasks file for ansible_hw2
+---
+- name: Define OS type & package name
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- include_tasks: "install_deb.yml"
+  when: ansible_os_family == "Debian"
+
+- include_tasks: "install_rhel.yml"
+  when: ansible_os_family == "RedHat"
+
+- include_tasks: "configure_apache.yml"
+
+- include_tasks: "configure_firewall.yml"
+
+...

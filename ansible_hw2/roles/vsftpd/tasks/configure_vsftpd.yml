@@ -1,0 +1,17 @@
+---
+- name: Configure vsftpd RedHat
+  template:
+    src: vsftpd.j2
+    dest: /etc/vsftpd/vsftpd.conf
+  when: ansible_os_family == "RedHat"
+  notify: restart vsftpd service
+
+- name: Configure vsftpd Debian
+  template:
+    src: vsftpd.j2
+    dest: /etc/vsftpd.conf
+  when: ansible_os_family == "Debian"
+  notify: restart vsftpd service
+
+
+...

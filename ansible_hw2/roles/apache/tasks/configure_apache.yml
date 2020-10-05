@@ -1,0 +1,8 @@
+---
+- name: Configure Apache
+  copy:
+    src: index.html
+    dest: /var/www/html/index.html
+  notify: restart apache service
+
+...

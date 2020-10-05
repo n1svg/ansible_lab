@@ -1,0 +1,12 @@
+---
+- name: Update apt cache.
+  apt: update_cache=yes
+
+- name: install "{{ package_name }}" vsftpd service
+  apt:
+    name: "{{ package_name }}"
+    state: latest
+
+- name: Enable service "{{ package_name }}" 
+  service: name= "{{ package_name }}" enabled=yes state=started
+...

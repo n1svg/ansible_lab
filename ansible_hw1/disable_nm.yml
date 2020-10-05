@@ -1,5 +1,5 @@
 ---
-- hosts: node2.example.com
+- hosts: all
   tasks:
   - name: Disable service NM
     service:

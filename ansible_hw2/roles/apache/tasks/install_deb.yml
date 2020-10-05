@@ -1,0 +1,9 @@
+---
+- name: Update apt cache.
+  apt: update_cache=yes
+
+- name: install Apache web server service
+  apt:
+    name: "{{ apache_package_name }}"
+    state: latest
+...

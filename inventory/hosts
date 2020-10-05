@@ -1,3 +1,7 @@
+[test]
+node0.example.com
+debian
+
 [nodes]
 node1.example.com
 node2.example.com

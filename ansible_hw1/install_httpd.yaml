@@ -19,11 +19,11 @@
   - name: check httpd service
     command: systemctl status httpd 
     register: result
-#    ignore_errors: yes
+    ignore_errors: yes
   - name: showing report
     debug:
-     var: result
-
+     var: result  ##json dot notation
+     
   - name: Create file 
     file:
       path: /var/www/html/index.html

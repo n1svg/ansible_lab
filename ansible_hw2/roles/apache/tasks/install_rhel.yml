@@ -1,0 +1,9 @@
+---
+- name: install httpd service
+  yum:
+    name: "{{ apache_package_name }}"
+    state: latest
+
+- name: Enable service httpd
+  service: name=httpd enabled=yes state=started
+...

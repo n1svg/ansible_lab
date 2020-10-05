@@ -1,0 +1,10 @@
+---
+# defaults file for ansible_hw2
+#canged
+anonymous_enable: YES 
+local_enable: YES
+write_enable: YES
+anon_upload_enable: YES
+dirmessage_enable: YES
+listen: YES
+

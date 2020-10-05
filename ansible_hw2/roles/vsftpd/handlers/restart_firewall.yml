@@ -1,0 +1,7 @@
+- name: restart firewall
+  service: name=firewalld state=restarted
+  when: "{{ ansible_os_family }}" == RedHat
+
+- name: restart firewall
+  service: name=iptables state=restarted
+  when: "{{ ansible_os_family }}" == Debian

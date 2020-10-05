@@ -1,0 +1,26 @@
+---
+- name: Configuring firewalld
+  firewalld:
+    service: "{{ item }}"
+    permanent: true
+    state: enabled
+  loop: 
+    - http
+    - https
+    - ftp
+  when: ansible_os_family == "RedHat"
+  notify: restart firewall
+ 
+- name: Configure iptables
+  iptables:
+    chain: INPUT
+    protocol: tcp
+    destination_port: "{{ item }}"
+    ctstate: NEW,ESTABLISHED,RELATED
+    jump: ACCEPT
+  loop:
+    - "80"
+    - "443"
+  when: ansible_os_family == "Debian"
+  
+...
